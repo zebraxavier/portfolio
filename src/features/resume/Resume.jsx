@@ -106,7 +106,7 @@ export default memo(function Resume() {
               {/* Actions */}
               <div className={styles.actions}>
                 <motion.a
-                  href={RESUME_PDF_URL}
+                  href={"https://drive.google.com/file/d/1ybftDU6Xm-Opi0xrzKxjGBoD6wAN2LAv/view?usp=sharing"}
                   download="Xavier_Leonard_Resume.pdf"
                   className={`${styles.downloadBtn} ${downloaded ? styles.downloaded : ''}`}
                   onClick={handleDownload}
