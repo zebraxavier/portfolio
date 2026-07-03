@@ -1,0 +1,57 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--t-base), border-color var(--t-base), box-shadow var(--t-base), color var(--t-base);
+  white-space: nowrap;
+  position: relative;
+}
+
+/* Sizes */
+.sm { padding: 0.4rem 0.9rem;  font-size: var(--text-sm);  }
+.md { padding: 0.6rem 1.4rem;  font-size: var(--text-base); }
+.lg { padding: 0.8rem 2rem;    font-size: var(--text-lg);  }
+
+/* Variants */
+.primary {
+  background: var(--glass-md-bg);
+  border-color: var(--glass-md-border);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-edge), var(--shadow-xs);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+}
+.primary:hover {
+  background: var(--glass-lg-bg);
+  border-color: var(--glass-lg-border);
+  box-shadow: var(--shadow-edge), var(--shadow-sm);
+}
+
+.accent {
+  background: var(--accent-dim);
+  border-color: var(--accent-border);
+  color: var(--accent);
+  box-shadow: var(--shadow-xs);
+}
+.accent:hover {
+  background: rgba(34,211,238,0.15);
+  border-color: rgba(34,211,238,0.35);
+  box-shadow: var(--shadow-accent), var(--shadow-xs);
+}
+
+.ghost {
+  background: transparent;
+  border-color: var(--glass-sm-border);
+  color: var(--text-secondary);
+}
+.ghost:hover {
+  background: var(--glass-xs-bg);
+  color: var(--text-primary);
+  border-color: var(--glass-md-border);
+}

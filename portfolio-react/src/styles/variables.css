@@ -1,0 +1,120 @@
+/* ============================================================
+   DESIGN SYSTEM — CYBER GLASS TOKENS
+   Premium dark palette. No color gradients. White-first.
+   ============================================================ */
+
+:root {
+  /* ── Background ── */
+  --bg-base:    #050505;
+  --bg-1:       #090909;
+  --bg-2:       #0d1117;
+  --bg-3:       #111111;
+  --bg-surface: #141414;
+
+  /* ── Glass surfaces ── */
+  --glass-xs-bg:     rgba(255,255,255,0.03);
+  --glass-xs-border: rgba(255,255,255,0.06);
+  --glass-sm-bg:     rgba(255,255,255,0.04);
+  --glass-sm-border: rgba(255,255,255,0.08);
+  --glass-md-bg:     rgba(255,255,255,0.06);
+  --glass-md-border: rgba(255,255,255,0.10);
+  --glass-lg-bg:     rgba(255,255,255,0.08);
+  --glass-lg-border: rgba(255,255,255,0.14);
+
+  --glass-blur-sm: blur(12px);
+  --glass-blur-md: blur(20px);
+  --glass-blur-lg: blur(32px);
+  --glass-blur-xl: blur(48px);
+
+  /* Navbar */
+  --nav-bg:   rgba(5,5,5,0.85);
+  --nav-blur: blur(24px);
+
+  /* ── Text ── */
+  --text-primary:   #ffffff;
+  --text-secondary: #a1a1aa;   /* zinc-400 */
+  --text-tertiary:  #52525b;   /* zinc-600 */
+  --text-disabled:  #27272a;
+
+  /* ── Accent — cyan, used sparingly ── */
+  --accent:        #22d3ee;    /* cyan-400 */
+  --accent-dim:    rgba(34,211,238,0.10);
+  --accent-border: rgba(34,211,238,0.20);
+  --accent-glow:   rgba(34,211,238,0.15);
+
+  /* ── Status ── */
+  --success: #4ade80;
+  --error:   #f87171;
+
+  /* ── Shadows — layered depth ── */
+  --shadow-xs:    0 1px 3px rgba(0,0,0,0.5);
+  --shadow-sm:    0 4px 12px rgba(0,0,0,0.6);
+  --shadow-md:    0 8px 28px rgba(0,0,0,0.7);
+  --shadow-lg:    0 20px 60px rgba(0,0,0,0.75);
+  --shadow-xl:    0 32px 80px rgba(0,0,0,0.8);
+
+  /* Card depth shadows */
+  --shadow-card:       0 2px 8px rgba(0,0,0,0.6),
+                       0 1px 0 rgba(255,255,255,0.05) inset;
+  --shadow-card-hover: 0 12px 40px rgba(0,0,0,0.8),
+                       0 1px 0 rgba(255,255,255,0.08) inset,
+                       0 0 0 1px rgba(255,255,255,0.1);
+
+  /* Edge lighting — top-left corner glow */
+  --shadow-edge: inset 0 1px 0 rgba(255,255,255,0.08),
+                 inset 1px 0 0 rgba(255,255,255,0.04);
+
+  /* Accent glow */
+  --shadow-accent: 0 0 20px rgba(34,211,238,0.15),
+                   0 0 40px rgba(34,211,238,0.06);
+
+  /* ── Spacing ── */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --section-y: clamp(5rem, 8vw, 7.5rem);
+
+  /* ── Radius ── */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   20px;
+  --radius-2xl:  28px;
+  --radius-full: 9999px;
+
+  /* ── Typography ── */
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs:   0.70rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-hero: clamp(2.75rem, 6.5vw, 5rem);
+
+  /* ── Easing & timing ── */
+  --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --t-fast:   0.15s var(--ease);
+  --t-base:   0.22s var(--ease);
+  --t-slow:   0.38s var(--ease);
+
+  /* ── Layout ── */
+  --max-width: 1200px;
+  --navbar-h:  64px;
+}

@@ -1,0 +1,169 @@
+.about {
+  padding-top: calc(var(--navbar-h) + var(--space-12));
+  padding-bottom: var(--section-y);
+}
+
+.pageHeader {
+  margin-bottom: var(--space-12);
+}
+
+.heading {
+  margin-top: var(--space-3);
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .grid { grid-template-columns: 280px 1fr; gap: var(--space-12); }
+}
+
+/* ── Photo ── */
+.photoWrap {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--glass-sm-border);
+  box-shadow: var(--shadow-card), var(--shadow-md);
+}
+
+.photo {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  min-height: 340px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Subtle top-left light reflection */
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.05) 0%,
+    transparent 45%
+  );
+  pointer-events: none;
+}
+
+/* ── Right column ── */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+/* ── Bio card ── */
+.bioCard {
+  background: var(--glass-sm-bg);
+  backdrop-filter: var(--glass-blur-md);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  border: 1px solid var(--glass-sm-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-8);
+  box-shadow: var(--shadow-card), var(--shadow-edge);
+  position: relative;
+  overflow: hidden;
+}
+
+.bioCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+.bio {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* ── Section sub-heading ── */
+.sectionSub {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-5);
+}
+
+/* ── Skills ── */
+.skillsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.skillRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.skillMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.skillName {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.skillPct {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.skillBar {
+  height: 3px;
+  background: var(--glass-xs-bg);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--glass-xs-border);
+}
+
+.skillFill {
+  height: 100%;
+  background: var(--text-primary);
+  border-radius: var(--radius-full);
+  opacity: 0.7;
+}
+
+/* ── Tools grid ── */
+.toolGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tool {
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-xs);
+  background: var(--glass-xs-bg);
+  border: 1px solid var(--glass-xs-border);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  cursor: default;
+  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+}
+
+.tool:hover {
+  color: var(--text-primary);
+  border-color: var(--glass-md-border);
+  background: var(--glass-sm-bg);
+}

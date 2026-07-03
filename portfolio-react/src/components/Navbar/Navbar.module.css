@@ -1,0 +1,196 @@
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: var(--navbar-h);
+  display: flex;
+  align-items: center;
+  transition: background var(--t-slow), border-color var(--t-slow), box-shadow var(--t-slow);
+  will-change: transform;
+}
+
+.header.scrolled {
+  background: var(--nav-bg);
+  backdrop-filter: var(--nav-blur);
+  -webkit-backdrop-filter: var(--nav-blur);
+  border-bottom: 1px solid var(--glass-sm-border);
+  box-shadow: var(--shadow-md);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+/* ── Logo ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.logoMark {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.logoDivider {
+  display: block;
+  width: 1px;
+  height: 16px;
+  background: var(--glass-md-border);
+}
+
+.logoSub {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
+}
+
+/* ── Desktop nav ── */
+.desktopNav {
+  display: none;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+@media (min-width: 768px) {
+  .desktopNav { display: flex; }
+  .hamburger  { display: none; }
+}
+
+.link {
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--t-base), background var(--t-base);
+  position: relative;
+}
+
+.link:hover { color: var(--text-primary); background: var(--glass-xs-bg); }
+
+.link.active {
+  color: var(--text-primary);
+  background: var(--glass-sm-bg);
+}
+
+/* Active dot indicator */
+.link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ── Actions ── */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ctaBtn {
+  display: none;
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-md-border);
+  background: var(--glass-sm-bg);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: background var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+}
+
+.ctaBtn:hover {
+  background: var(--glass-md-bg);
+  border-color: var(--glass-lg-border);
+  box-shadow: var(--shadow-edge);
+}
+
+@media (min-width: 640px) { .ctaBtn { display: flex; } }
+
+.hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-sm-bg);
+  border: 1px solid var(--glass-sm-border);
+  color: var(--text-secondary);
+  transition: color var(--t-base), background var(--t-base);
+}
+.hamburger:hover { color: var(--text-primary); background: var(--glass-md-bg); }
+
+/* ── Mobile drawer ── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 290;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.mobileDrawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  z-index: 300;
+  width: min(320px, 80vw);
+  background: var(--bg-2);
+  border-left: 1px solid var(--glass-sm-border);
+  box-shadow: var(--shadow-xl);
+  padding: calc(var(--navbar-h) + var(--space-8)) var(--space-8) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow-y: auto;
+}
+
+.mobileLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xl);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color var(--t-base), background var(--t-base);
+  border: 1px solid transparent;
+}
+.mobileLink:hover {
+  color: var(--text-primary);
+  background: var(--glass-sm-bg);
+  border-color: var(--glass-sm-border);
+}
+.mobileActive {
+  color: var(--text-primary);
+  background: var(--glass-sm-bg);
+  border-color: var(--glass-sm-border);
+}
+
+.mobileLinkNum {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent);
+  min-width: 22px;
+}

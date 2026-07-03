@@ -1,0 +1,31 @@
+/* Hides system cursor — applied via JS by adding class to body */
+:global(.custom-cursor) * {
+  cursor: none !important;
+}
+
+.dot {
+  position: fixed;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  mix-blend-mode: difference;
+}
+
+.ring {
+  position: fixed;
+  top: -18px;
+  left: -18px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+}
