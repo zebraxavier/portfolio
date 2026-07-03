@@ -1,0 +1,35 @@
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--glass-sm-bg);
+  border: 1px solid var(--glass-sm-border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  transition:
+    color var(--t-base),
+    background var(--t-base),
+    border-color var(--t-base),
+    box-shadow var(--t-base),
+    transform var(--t-base);
+}
+
+.toggle:hover {
+  color: var(--text-primary);
+  background: var(--glass-md-bg);
+  border-color: var(--glass-md-border);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

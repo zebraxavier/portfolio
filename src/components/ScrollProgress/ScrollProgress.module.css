@@ -1,0 +1,11 @@
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  z-index: calc(var(--z-navbar) + 1);
+  transform-origin: 0%;
+  box-shadow: 0 0 10px var(--accent-glow), 0 0 2px var(--accent);
+}

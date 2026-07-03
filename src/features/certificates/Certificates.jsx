@@ -1,48 +1,75 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
-import { RiAwardLine, RiExternalLinkLine } from 'react-icons/ri';
+import { RiAwardLine, RiExternalLinkLine, RiShieldCheckLine } from 'react-icons/ri';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import SEO from '../../components/SEO/SEO';
+import { useCardTilt } from '../../hooks/useCardTilt';
 import styles from './Certificates.module.css';
 
 const CERTS = [
+  {
+    id: 'mongodb',
+    title: 'MongoDB Certification',
+    issuer: 'MongoDB University',
+    date: null,
+    description: 'Foundational knowledge in NoSQL databases, document-based data modeling, and storage systems.',
+    link: '#',
+    icon: 'shield',
+  },
+  {
+    id: 'uipath',
+    title: 'UiPath Automation Certification',
+    issuer: 'UiPath Academy',
+    date: null,
+    description: 'Basics of Robotic Process Automation (RPA) and end-to-end workflow automation design.',
+    link: '#',
+    icon: 'shield',
+  },
+  {
+    id: 'oracle',
+    title: 'Oracle Cloud Certification',
+    issuer: 'Oracle University',
+    date: null,
+    description: 'Cloud computing fundamentals covering infrastructure, deployment models, and Oracle Cloud services.',
+    link: '#',
+    icon: 'shield',
+  },
   {
     id: 'comp',
     title: 'College Competition Participant',
     issuer: 'Dept. of Computer Science — NPR Arts & Science College',
     date: null,
+    description: 'Participated in departmental computer science competition, demonstrating technical problem-solving skills.',
     link: 'https://drive.google.com/drive/folders/1Lj_vs5oe1xRJlqboBpQJDZvmN5Hl071U?usp=drive_link',
-  },
-  {
-    id: 'css',
-    title: 'Advanced CSS and Sass',
-    issuer: 'Design Masters',
-    date: 'Jan 2023',
-    link: '#',
-  },
-  {
-    id: 'react',
-    title: 'React — The Complete Guide',
-    issuer: 'Online Courses Inc.',
-    date: 'Sep 2022',
-    link: '#',
-  },
-  {
-    id: 'node',
-    title: 'Node.js, Express & MongoDB',
-    issuer: 'Server-side Gurus',
-    date: 'Jun 2022',
-    link: '#',
+    icon: 'award',
   },
 ];
+
+const certsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Certifications by Xavier Leonard',
+  itemListElement: CERTS.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'EducationalOccupationalCredential',
+      name: c.title,
+      description: c.description,
+      recognizedBy: { '@type': 'Organization', name: c.issuer },
+    },
+  })),
+};
 
 export default memo(function Certificates() {
   return (
     <PageTransition>
       <SEO
         title="Certificates"
-        description="Professional certifications and achievements by Xavier Leonard."
+        description="Xavier Leonard's professional certifications — MongoDB, UiPath Automation, Oracle Cloud, and academic recognition from NPR Arts & Science College."
         path="/certificates"
+        keywords="Xavier Leonard certificates, MongoDB certification, UiPath RPA, Oracle Cloud, computer science award"
+        schema={certsSchema}
       />
 
       <main className={`page ${styles.certs}`}>
@@ -78,21 +105,32 @@ export default memo(function Certificates() {
 });
 
 const CertCard = memo(function CertCard({ cert }) {
+  const { ref, onMouseMove, onMouseLeave } = useCardTilt({ maxTilt: 5, scale: 1.02 });
+
   return (
     <motion.article
+      ref={ref}
       className={styles.card}
-      whileHover={{ y: -4 }}
+      whileHover={{ y: -5 }}
       transition={{ type: 'spring', stiffness: 300, damping: 22 }}
       aria-label={cert.title}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
     >
       <div className={styles.edgeLight} aria-hidden="true" />
 
       <div className={styles.iconWrap} aria-hidden="true">
-        <RiAwardLine size={18} />
+        {cert.icon === 'shield'
+          ? <RiShieldCheckLine size={18} />
+          : <RiAwardLine size={18} />
+        }
       </div>
 
       <h2 className={styles.title}>{cert.title}</h2>
       <p className={styles.issuer}>{cert.issuer}</p>
+      {cert.description && (
+        <p className={styles.certDesc}>{cert.description}</p>
+      )}
 
       <div className={styles.footer}>
         {cert.date && (

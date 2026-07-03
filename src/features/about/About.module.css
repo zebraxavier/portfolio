@@ -3,12 +3,40 @@
   padding-bottom: var(--section-y);
 }
 
-.pageHeader {
+.pageHeader { margin-bottom: var(--space-12); }
+.heading    { margin-top: var(--space-3); }
+
+/* ── Stats row ── */
+.statsRow {
+  display: flex;
+  gap: var(--space-10);
   margin-bottom: var(--space-12);
+  flex-wrap: wrap;
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--glass-xs-border);
 }
 
-.heading {
-  margin-top: var(--space-3);
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  letter-spacing: 0.06em;
 }
 
 /* ── Grid ── */
@@ -19,7 +47,7 @@
   align-items: start;
 }
 @media (min-width: 900px) {
-  .grid { grid-template-columns: 280px 1fr; gap: var(--space-12); }
+  .grid { grid-template-columns: 260px 1fr; gap: var(--space-12); }
 }
 
 /* ── Photo ── */
@@ -29,25 +57,32 @@
   overflow: hidden;
   border: 1px solid var(--glass-sm-border);
   box-shadow: var(--shadow-card), var(--shadow-md);
+  transition: box-shadow var(--t-slow), transform var(--t-slow);
+}
+
+.photoWrap:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px) scale(1.01);
 }
 
 .photo {
   width: 100%;
-  max-width: 280px;
+  max-width: 260px;
   height: auto;
-  min-height: 340px;
+  min-height: 320px;
   object-fit: cover;
   display: block;
 }
 
-/* Subtle top-left light reflection */
+/* Ambient light reflection */
 .photoOverlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     135deg,
     rgba(255,255,255,0.05) 0%,
-    transparent 45%
+    transparent 50%,
+    rgba(0,0,0,0.1) 100%
   );
   pointer-events: none;
 }
@@ -56,34 +91,53 @@
 .right {
   display: flex;
   flex-direction: column;
-  gap: var(--space-10);
+  gap: var(--space-8);
 }
 
-/* ── Bio card ── */
+/* ── Bio card — glass panel ── */
 .bioCard {
-  background: var(--glass-sm-bg);
+  background: var(--glass-panel-bg);
   backdrop-filter: var(--glass-blur-md);
   -webkit-backdrop-filter: var(--glass-blur-md);
-  border: 1px solid var(--glass-sm-border);
+  border: 1px solid var(--glass-panel-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-6) var(--space-8);
-  box-shadow: var(--shadow-card), var(--shadow-edge);
+  padding: var(--space-6);
+  box-shadow: var(--glass-panel-shadow);
   position: relative;
   overflow: hidden;
+  transition: box-shadow var(--t-slow), border-color var(--t-base);
 }
 
+.bioCard:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--glass-md-border);
+}
+
+/* Inset edge highlight */
 .bioCard::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+/* Reflection layer */
+.bioCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--card-reflection);
+  pointer-events: none;
+  opacity: 0.4;
 }
 
 .bio {
   font-size: var(--text-base);
   color: var(--text-secondary);
   line-height: 1.8;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Section sub-heading ── */
@@ -92,9 +146,9 @@
   font-size: var(--text-xs);
   font-weight: 500;
   color: var(--accent);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-4);
 }
 
 /* ── Skills ── */
@@ -120,6 +174,7 @@
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--text-primary);
+  letter-spacing: 0.01em;
 }
 
 .skillPct {
@@ -129,21 +184,22 @@
 }
 
 .skillBar {
-  height: 3px;
+  height: 2px;
   background: var(--glass-xs-bg);
   border-radius: var(--radius-full);
   overflow: hidden;
-  border: 1px solid var(--glass-xs-border);
 }
 
+/* Emerald skill fill */
 .skillFill {
   height: 100%;
-  background: var(--text-primary);
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
   border-radius: var(--radius-full);
-  opacity: 0.7;
+  opacity: 0.85;
+  box-shadow: 0 0 4px rgba(16,185,129,0.25);
 }
 
-/* ── Tools grid ── */
+/* ── Tools grid — spring hover ── */
 .toolGrid {
   display: flex;
   flex-wrap: wrap;
@@ -151,19 +207,22 @@
 }
 
 .tool {
-  padding: 0.3rem 0.8rem;
-  border-radius: var(--radius-xs);
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-sm);
   background: var(--glass-xs-bg);
   border: 1px solid var(--glass-xs-border);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--text-secondary);
   cursor: default;
-  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+  letter-spacing: 0.02em;
 }
 
 .tool:hover {
-  color: var(--text-primary);
-  border-color: var(--glass-md-border);
-  background: var(--glass-sm-bg);
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: var(--accent-subtle);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: var(--shadow-accent);
 }

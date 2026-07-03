@@ -1,11 +1,12 @@
 .footer {
   position: relative;
-  background: var(--bg-1);
+  background: var(--bg-2);
   border-top: 1px solid var(--glass-sm-border);
   padding: var(--space-10) 0 var(--space-8);
   z-index: 1;
 }
 
+/* Premium emerald gradient accent line */
 .topLine {
   position: absolute;
   top: -1px; left: 0; right: 0;
@@ -13,11 +14,14 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--glass-md-border) 30%,
-    rgba(34,211,238,0.2) 50%,
-    var(--glass-md-border) 70%,
+    rgba(255,255,255,0.06) 15%,
+    var(--accent-dim) 40%,
+    rgba(16,185,129,0.18) 50%,
+    var(--accent-dim) 60%,
+    rgba(255,255,255,0.06) 85%,
     transparent 100%
   );
+  opacity: 0.7;
 }
 
 .inner {
@@ -42,12 +46,14 @@
   font-weight: 700;
   font-size: var(--text-base);
   color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 .brandMono {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--text-tertiary);
+  letter-spacing: 0.04em;
 }
 
 .links {
@@ -59,9 +65,13 @@
 .link {
   font-size: var(--text-sm);
   color: var(--text-tertiary);
-  transition: color var(--t-base);
+  transition: color var(--t-base), transform var(--t-base);
+  letter-spacing: 0.01em;
 }
-.link:hover { color: var(--text-primary); }
+.link:hover {
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
 
 .right {
   display: flex;
@@ -89,16 +99,20 @@
   border: 1px solid var(--glass-sm-border);
   background: var(--glass-xs-bg);
   color: var(--text-tertiary);
-  transition: color var(--t-base), border-color var(--t-base), background var(--t-base);
+  transition: color var(--t-base), border-color var(--t-base), background var(--t-base), transform var(--t-base), box-shadow var(--t-base);
 }
+
 .socialBtn:hover {
   color: var(--text-primary);
   border-color: var(--glass-md-border);
   background: var(--glass-sm-bg);
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .copy {
   font-size: var(--text-xs);
   color: var(--text-tertiary);
   font-family: var(--font-mono);
+  letter-spacing: 0.02em;
 }

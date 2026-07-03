@@ -1,50 +1,64 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
-import { RiMapPinLine, RiTimeLine } from 'react-icons/ri';
+import { RiMapPinLine, RiTimeLine, RiBookOpenLine } from 'react-icons/ri';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import SEO from '../../components/SEO/SEO';
 import styles from './Education.module.css';
 
 const EDUCATION = [
   {
-    id: 'uni',
-    institution: 'University of Technology',
-    degree: 'B.Sc. Computer Science',
-    duration: '2018 – 2022',
-    location: 'On-campus',
+    id: 'mca',
+    institution: 'KGISL Institute of Information Management',
+    location: 'Coimbatore, Tamil Nadu',
+    degree: 'Master of Computer Applications (MCA)',
+    duration: 'Aug 2025 — May 2027',
+    status: 'In Progress',
+    gpa: null,
     description:
-      'Focused on algorithms, data structures, and software engineering. Final year project on machine learning applications in production systems.',
-    highlights: ['Algorithms', 'Data Structures', 'Machine Learning', 'Software Architecture'],
+      'Currently pursuing my postgraduate degree with a focus on advanced software engineering, cloud infrastructure, and database systems. Building deeper expertise in Python, computer networks, and operating systems.',
+    highlights: ['Database Management Systems', 'Python', 'Web Development', 'Operating Systems', 'Computer Networks'],
   },
   {
-    id: 'hs',
-    institution: 'Downtown High School',
-    degree: 'High School Diploma',
-    duration: '2016 – 2018',
-    location: 'On-campus',
+    id: 'bsc',
+    institution: 'NPR Arts and Science College, Natham',
+    location: 'Dindigul, Tamil Nadu',
+    degree: 'Bachelor of Computer Science (B.Sc.)',
+    duration: 'Aug 2022 — May 2025',
+    status: 'Completed',
+    gpa: '6.9 / 10.0',
     description:
-      'Mathematics and physics specialisation, building the analytical foundation for a career in computer science and engineering.',
-    highlights: ['Mathematics', 'Physics', 'Computing'],
-  },
-  {
-    id: 'bootcamp',
-    institution: 'Online Course Platform',
-    degree: 'Full-Stack Web Developer Bootcamp',
-    duration: '2023',
-    location: 'Remote',
-    description:
-      'Comprehensive curriculum covering the MERN stack, RESTful APIs, authentication, deployment, and modern frontend development patterns.',
-    highlights: ['MongoDB', 'Express', 'React', 'Node.js', 'REST APIs'],
+      'Graduated with a foundation in programming, data structures, and database management. Coursework covered core engineering principles across Java, web development, and operating systems.',
+    highlights: ['Data Structures', 'Database Management Systems', 'Java', 'Web Development', 'Operating Systems'],
   },
 ];
+
+const educationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Xavier Leonard E',
+  alumniOf: [
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'KGISL Institute of Information Management',
+      address: { '@type': 'PostalAddress', addressLocality: 'Coimbatore', addressCountry: 'IN' },
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'NPR Arts and Science College',
+      address: { '@type': 'PostalAddress', addressLocality: 'Natham', addressCountry: 'IN' },
+    },
+  ],
+};
 
 export default memo(function Education() {
   return (
     <PageTransition>
       <SEO
         title="Education"
-        description="Educational background and qualifications of Xavier Leonard."
+        description="Xavier Leonard's academic background — B.Sc. Computer Science from NPR Arts & Science College and currently pursuing MCA at KGISL Institute, Coimbatore."
         path="/education"
+        keywords="Xavier Leonard education, MCA KGISL, BSc Computer Science NPR College, Coimbatore, Tamil Nadu"
+        schema={educationSchema}
       />
 
       <main className={`page ${styles.education}`}>
@@ -108,7 +122,20 @@ export default memo(function Education() {
                         <RiMapPinLine size={11} aria-hidden="true" />
                         {edu.location}
                       </span>
+                      {edu.gpa && (
+                        <span className={styles.metaItem}>
+                          <RiBookOpenLine size={11} aria-hidden="true" />
+                          GPA: {edu.gpa}
+                        </span>
+                      )}
                     </div>
+                  </div>
+
+                  {/* Status badge */}
+                  <div style={{ marginBottom: 'var(--space-3)' }}>
+                    <span className={`${styles.statusBadge} ${edu.status === 'In Progress' ? styles.inProgress : styles.completed}`}>
+                      {edu.status}
+                    </span>
                   </div>
 
                   <p className={styles.desc}>{edu.description}</p>

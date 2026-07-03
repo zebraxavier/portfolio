@@ -1,16 +1,69 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#08081a" />
-    <!-- Google Fonts preconnect for performance -->
+
+    <!-- Primary SEO -->
+    <title>Xavier Leonard E — Full-Stack Developer & MCA Student</title>
+    <meta name="description" content="Computer Science graduate and MCA student specialising in full-stack web development, AI automation, and cloud technologies. Based in Tamil Nadu, India." />
+    <meta name="author" content="Xavier Leonard E" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Theme color (JS will update dynamically) -->
+    <meta name="theme-color" content="#050505" id="meta-theme-color" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Fonts: preconnect + preload key weights -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <title>Xavier Leonard — Developer Portfolio</title>
+    <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    </noscript>
+
+    <!-- FOUC Prevention: apply saved/preferred theme BEFORE first paint -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('portfolio-theme');
+          var theme = (saved === 'dark' || saved === 'light')
+            ? saved
+            : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          document.documentElement.setAttribute('data-theme', theme);
+          // Update theme-color meta
+          var tc = document.getElementById('meta-theme-color');
+          if (tc) tc.content = theme === 'light' ? '#f8f9fb' : '#050505';
+        } catch (e) {}
+        // Enable smooth transitions after hydration
+        window.addEventListener('DOMContentLoaded', function () {
+          document.documentElement.classList.add('theme-ready');
+        });
+      })();
+    </script>
+
+    <!-- Google Analytics 4 (replace G-XXXXXXXXXX with your Measurement ID) -->
+    <!-- Remove these two tags if you don't use GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', { send_page_view: false });
+    </script>
   </head>
   <body>
+    <!-- Atmospheric layers: vignette + radial top-light -->
+    <div id="vignette" aria-hidden="true"></div>
+    <div id="radial-light" aria-hidden="true"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

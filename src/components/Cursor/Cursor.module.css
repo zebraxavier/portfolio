@@ -1,8 +1,8 @@
-/* Hides system cursor — applied via JS by adding class to body */
 :global(.custom-cursor) * {
   cursor: none !important;
 }
 
+/* Inner dot — crisp, blend-mode difference */
 .dot {
   position: fixed;
   top: -4px;
@@ -12,20 +12,21 @@
   background: var(--text-primary);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: var(--z-cursor);
   will-change: transform;
   mix-blend-mode: difference;
 }
 
+/* Outer ring — lags, elegant follow */
 .ring {
   position: fixed;
-  top: -18px;
-  left: -18px;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255,255,255,0.35);
+  top: -16px;
+  left: -16px;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(255,255,255,0.25);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9998;
+  z-index: calc(var(--z-cursor) - 1);
   will-change: transform;
 }

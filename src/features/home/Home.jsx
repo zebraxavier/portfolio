@@ -5,12 +5,13 @@ import { RiArrowRightLine } from 'react-icons/ri';
 import PageTransition from '../../components/PageTransition/PageTransition';
 import SEO from '../../components/SEO/SEO';
 import { useTypewriter } from '../../hooks/useTypewriter';
+import { useAnalytics } from '../../hooks/useAnalytics';
 import styles from './Home.module.css';
 
 const STATS = [
-  { value: '5+',  label: 'Years exp.' },
-  { value: '20+', label: 'Projects'   },
-  { value: '∞',   label: 'Coffee'     },
+  { value: '1+',  label: 'Yr. exp.'  },
+  { value: '3+',  label: 'Projects'  },
+  { value: '3',   label: 'Certs'     },
 ];
 
 const stagger = {
@@ -25,16 +26,18 @@ const item = {
 
 export default memo(function Home() {
   const typed = useTypewriter(
-    ['Full-Stack Developer', 'MERN Engineer', 'UI/UX Craftsman'],
+    ['Full-Stack Developer', 'MCA Student', 'AI & Automation Explorer', 'Cloud Enthusiast'],
     75, 40, 1800
   );
+  const { trackNavClick } = useAnalytics();
 
   return (
     <PageTransition>
       <SEO
         title="Xavier Leonard — Full-Stack Developer"
-        description="Full-stack MERN developer building fast, accessible, production-quality web applications."
+        description="Computer Science graduate and MCA student specialising in full-stack web development, AI, and cloud technologies. Open to software development and ERP roles."
         path="/"
+        keywords="Xavier Leonard, full-stack developer, MCA, computer science, MERN, MongoDB, JavaScript, Tamil Nadu, hire developer"
       />
 
       <main className={`page ${styles.home}`} aria-label="Home">
@@ -50,7 +53,7 @@ export default memo(function Home() {
               {/* Mono label */}
               <motion.div variants={item} className={styles.label}>
                 <span className="dot-accent" aria-hidden="true" />
-                <span className="mono">Available for hire</span>
+                <span className="mono">Available for opportunities</span>
               </motion.div>
 
               {/* Name */}
@@ -66,17 +69,28 @@ export default memo(function Home() {
 
               {/* Description */}
               <motion.p variants={item} className={styles.desc}>
-                I design and build scalable web applications — from pixel-precise
-                interfaces to robust backend systems. Based in the digital universe.
+                Computer Science graduate currently pursuing my MCA — building
+                software systems at the intersection of web development, AI automation,
+                and cloud infrastructure. Based in Tamil Nadu, India.
               </motion.p>
 
               {/* CTAs */}
               <motion.div variants={item} className={styles.ctas}>
-                <Link to="/projects" className={styles.btnPrimary} data-cursor-hover>
+                <Link
+                  to="/projects"
+                  className={styles.btnPrimary}
+                  data-cursor-hover
+                  onClick={() => trackNavClick('View Work')}
+                >
                   View Work
                   <RiArrowRightLine size={16} aria-hidden="true" />
                 </Link>
-                <Link to="/contact" className={styles.btnGhost} data-cursor-hover>
+                <Link
+                  to="/contact"
+                  className={styles.btnGhost}
+                  data-cursor-hover
+                  onClick={() => trackNavClick('Get In Touch')}
+                >
                   Get In Touch
                 </Link>
               </motion.div>
@@ -116,13 +130,13 @@ export default memo(function Home() {
               <div className={styles.cardBadge}>
                 <span className={styles.badgeDot} />
                 <span className="mono" style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
-                  status: online
+                  status: open to work
                 </span>
               </div>
 
-              {/* Skill chips */}
+              {/* Skill chips — real tech stack */}
               <div className={styles.chips}>
-                {['React', 'Node.js', 'MongoDB', 'TypeScript'].map(s => (
+                {['JavaScript', 'MongoDB', 'C / C++', 'SQL'].map(s => (
                   <span key={s} className={styles.chip}>{s}</span>
                 ))}
               </div>

@@ -5,18 +5,42 @@
   gap: var(--space-2);
   font-family: var(--font-sans);
   font-weight: 500;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background var(--t-base), border-color var(--t-base), box-shadow var(--t-base), color var(--t-base);
+  transition:
+    background var(--t-base),
+    border-color var(--t-base),
+    box-shadow var(--t-base),
+    color var(--t-base),
+    transform var(--t-base);
   white-space: nowrap;
   position: relative;
+  letter-spacing: 0.01em;
+  overflow: hidden;
+}
+
+/* Shimmer sweep on hover */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.btn:not(:disabled):hover::before {
+  left: 100%;
 }
 
 /* Sizes */
-.sm { padding: 0.4rem 0.9rem;  font-size: var(--text-sm);  }
-.md { padding: 0.6rem 1.4rem;  font-size: var(--text-base); }
-.lg { padding: 0.8rem 2rem;    font-size: var(--text-lg);  }
+.sm { padding: 0.375rem 0.875rem; font-size: var(--text-sm);  }
+.md { padding: 0.5rem 1.25rem;    font-size: var(--text-base); }
+.lg { padding: 0.75rem 1.75rem;   font-size: var(--text-lg);  }
 
 /* Variants */
 .primary {
@@ -31,18 +55,21 @@
   background: var(--glass-lg-bg);
   border-color: var(--glass-lg-border);
   box-shadow: var(--shadow-edge), var(--shadow-sm);
+  transform: translateY(-1px);
 }
 
 .accent {
-  background: var(--accent-dim);
+  background: var(--accent-subtle);
   border-color: var(--accent-border);
   color: var(--accent);
   box-shadow: var(--shadow-xs);
 }
 .accent:hover {
-  background: rgba(34,211,238,0.15);
-  border-color: rgba(34,211,238,0.35);
+  background: var(--accent-dim);
+  border-color: var(--accent);
   box-shadow: var(--shadow-accent), var(--shadow-xs);
+  color: var(--accent-hover);
+  transform: translateY(-2px);
 }
 
 .ghost {
@@ -54,4 +81,12 @@
   background: var(--glass-xs-bg);
   color: var(--text-primary);
   border-color: var(--glass-md-border);
+  transform: translateY(-1px);
+}
+
+/* Disabled state */
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
 }

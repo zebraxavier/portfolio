@@ -14,12 +14,15 @@ export default defineConfig({
 
   build: {
     outDir: 'dist',
+    // Target modern browsers for smaller output
+    target: 'es2020',
     // Warn if any chunk exceeds 600 kB
     chunkSizeWarningLimit: 600,
+    // Inline small assets (<4 kB) to save requests
+    assetsInlineLimit: 4096,
     rollupOptions: {
       output: {
-        // Manual chunk splitting for better caching
-        // Vite 8 (rolldown) requires manualChunks to be a function
+        // Manual chunk splitting for better long-term caching
         manualChunks(id) {
           if (id.includes('node_modules')) {
             if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
@@ -33,6 +36,9 @@ export default defineConfig({
             }
             if (id.includes('axios')) {
               return 'vendor-axios';
+            }
+            if (id.includes('lenis')) {
+              return 'vendor-lenis';
             }
           }
         },

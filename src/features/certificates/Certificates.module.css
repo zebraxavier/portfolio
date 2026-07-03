@@ -6,50 +6,100 @@
 .pageHeader { margin-bottom: var(--space-12); }
 .heading    { margin-top: var(--space-3); }
 
-/* ── Card ── */
+/* ── Card — glass panel with premium depth ── */
 .card {
   position: relative;
-  background: var(--glass-sm-bg);
+  background: var(--glass-panel-bg);
   backdrop-filter: var(--glass-blur-md);
   -webkit-backdrop-filter: var(--glass-blur-md);
-  border: 1px solid var(--glass-sm-border);
+  border: 1px solid var(--glass-panel-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-6);
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   height: 100%;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--glass-panel-shadow);
   overflow: hidden;
-  transition: border-color var(--t-base), box-shadow var(--t-slow);
+  transition: border-color var(--t-base), box-shadow var(--t-slow), transform var(--t-base);
+  cursor: default;
 }
 
 .card:hover {
   border-color: var(--glass-md-border);
   box-shadow: var(--shadow-card-hover);
+  transform: translateY(-5px) rotate(-0.3deg);
+}
+
+/* Reflection */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--card-reflection);
+  pointer-events: none;
+  opacity: 0.35;
+  transition: opacity var(--t-base);
+}
+
+.card:hover::before {
+  opacity: 0.65;
+}
+
+/* Shimmer effect on hover */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.04),
+    transparent
+  );
+  transform: skewX(-12deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  animation: card-shimmer 0.7s ease forwards;
 }
 
 .edgeLight {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
   opacity: 0;
   transition: opacity var(--t-base);
+  z-index: 1;
 }
 .card:hover .edgeLight { opacity: 1; }
 
+/* Emerald icon wrap */
 .iconWrap {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-sm);
-  background: var(--glass-xs-bg);
-  border: 1px solid var(--glass-sm-border);
-  color: var(--text-secondary);
+  background: var(--accent-subtle);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: box-shadow var(--t-base), transform var(--t-base);
+}
+
+.card:hover .iconWrap {
+  box-shadow: 0 0 12px rgba(16,185,129,0.2);
+  transform: scale(1.08);
 }
 
 .title {
@@ -58,12 +108,28 @@
   font-weight: 600;
   color: var(--text-primary);
   line-height: 1.4;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
 }
 
 .issuer {
   font-size: var(--text-sm);
   color: var(--text-secondary);
   line-height: 1.5;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 1;
+}
+
+/* Certificate description */
+.certDesc {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 1;
   flex: 1;
 }
 
@@ -75,14 +141,18 @@
   padding-top: var(--space-3);
   border-top: 1px solid var(--glass-xs-border);
   gap: var(--space-3);
+  position: relative;
+  z-index: 1;
 }
 
 .date {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--text-tertiary);
+  letter-spacing: 0.04em;
 }
 
+/* Emerald link */
 .credLink {
   display: inline-flex;
   align-items: center;
@@ -91,6 +161,11 @@
   font-weight: 500;
   color: var(--accent);
   margin-left: auto;
-  transition: gap var(--t-base), opacity var(--t-base);
+  transition: gap var(--t-base), color var(--t-base), transform var(--t-base);
+  letter-spacing: 0.02em;
 }
-.credLink:hover { gap: 0.5rem; opacity: 0.8; }
+.credLink:hover {
+  gap: 0.5rem;
+  color: var(--accent-hover);
+  transform: translateX(2px);
+}

@@ -2,7 +2,7 @@
  * Centralized error handler middleware.
  * Keeps controllers clean — they just call next(err).
  */
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, _next) => {
   const status = err.statusCode || 500;
   const message =
     process.env.NODE_ENV === 'production' && status === 500

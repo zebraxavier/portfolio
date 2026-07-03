@@ -1,16 +1,19 @@
-import { useState, useEffect, useRef, memo } from 'react';
+import { useState, useEffect, useRef, memo, useCallback } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RiMenuLine, RiCloseLine } from 'react-icons/ri';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import { useAnalytics } from '../../hooks/useAnalytics';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [
-  { to: '/',             label: 'Home'         },
-  { to: '/about',        label: 'About'        },
-  { to: '/projects',     label: 'Projects'     },
-  { to: '/certificates', label: 'Certs'        },
-  { to: '/education',    label: 'Education'    },
-  { to: '/contact',      label: 'Contact'      },
+  { to: '/',             label: 'Home'      },
+  { to: '/about',        label: 'About'     },
+  { to: '/projects',     label: 'Projects'  },
+  { to: '/certificates', label: 'Certs'     },
+  { to: '/education',    label: 'Education' },
+  { to: '/resume',       label: 'Resume'    },
+  { to: '/contact',      label: 'Contact'   },
 ];
 
 const Navbar = memo(function Navbar() {
@@ -19,6 +22,7 @@ const Navbar = memo(function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const lastY = useRef(0);
   const location = useLocation();
+  const { trackNavClick } = useAnalytics();
 
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
@@ -38,6 +42,10 @@ const Navbar = memo(function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  const handleNavClick = useCallback((label) => {
+    trackNavClick(label);
+  }, [trackNavClick]);
+
   return (
     <>
       <motion.header
@@ -48,7 +56,12 @@ const Navbar = memo(function Navbar() {
       >
         <div className={`container ${styles.inner}`}>
           {/* Logo */}
-          <NavLink to="/" className={styles.logo} aria-label="Xavier Leonard — Go to home">
+          <NavLink
+            to="/"
+            className={styles.logo}
+            aria-label="Xavier Leonard — Go to home"
+            onClick={() => handleNavClick('Home')}
+          >
             <span className={styles.logoMark} aria-hidden="true">XL</span>
             <span className={styles.logoDivider} aria-hidden="true" />
             <span className={styles.logoSub}>Portfolio</span>
@@ -65,6 +78,7 @@ const Navbar = memo(function Navbar() {
                     className={({ isActive }) =>
                       `${styles.link} ${isActive ? styles.active : ''}`
                     }
+                    onClick={() => handleNavClick(label)}
                   >
                     {label}
                   </NavLink>
@@ -73,9 +87,15 @@ const Navbar = memo(function Navbar() {
             </ul>
           </nav>
 
-          {/* CTA + hamburger */}
+          {/* CTA + theme toggle + hamburger */}
           <div className={styles.actions}>
-            <NavLink to="/contact" className={styles.ctaBtn} aria-label="Hire me">
+            <ThemeToggle />
+            <NavLink
+              to="/contact"
+              className={styles.ctaBtn}
+              aria-label="Hire me"
+              onClick={() => handleNavClick('Hire Me')}
+            >
               Hire Me
             </NavLink>
             <button
@@ -137,6 +157,7 @@ const Navbar = memo(function Navbar() {
                       className={({ isActive }) =>
                         `${styles.mobileLink} ${isActive ? styles.mobileActive : ''}`
                       }
+                      onClick={() => handleNavClick(label)}
                     >
                       <span className={styles.mobileLinkNum}>{String(i + 1).padStart(2, '0')}</span>
                       {label}
